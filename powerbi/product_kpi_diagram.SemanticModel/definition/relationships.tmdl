@@ -1,0 +1,43 @@
+relationship cf2241e1-6af4-4c4a-a0db-9a74806b5d92
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_customers.BirthDate
+	toColumn: LocalDateTable_ffe98ff6-617c-4b06-9de8-39447383b243.Date
+
+relationship 6bff18fe-1a03-4132-9ebc-5611d2737ca3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_date.Date
+	toColumn: LocalDateTable_22ed8326-62ad-4a2e-9b8c-db886f0f31a0.Date
+
+relationship 652c57d4-4491-44a8-a7d1-aece9673f6f4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: fact_sales.StockDate
+	toColumn: LocalDateTable_9d084715-70e0-4958-a0e6-9918ac04d427.Date
+
+relationship AutoDetected_ce2c7499-9b80-446d-b587-24437fc1b83e
+	fromColumn: fact_sales.CustomerKey
+	toColumn: dim_customers.CustomerKey
+
+relationship AutoDetected_21c70981-49b3-47f5-a6e9-48e3518156a1
+	fromColumn: fact_returns.ProductKey
+	toColumn: dim_products.ProductKey
+
+relationship AutoDetected_55fec166-89b2-4664-887f-3763c186808a
+	fromColumn: fact_sales.ProductKey
+	toColumn: dim_products.ProductKey
+
+relationship AutoDetected_c93369aa-d709-437f-aac7-edd294dd9472
+	fromColumn: fact_returns.TerritoryKey
+	toColumn: dim_territories.TerritoryKey
+
+relationship AutoDetected_057cf8d1-b717-4ebc-ae58-147794961889
+	fromColumn: fact_sales.TerritoryKey
+	toColumn: dim_territories.TerritoryKey
+
+relationship 2f2c456c-95c6-c62b-a766-9ebb19fae346
+	fromColumn: fact_sales.OrderDate
+	toColumn: dim_date.Date
+
+relationship a54a214e-011f-96c4-12b0-3959150a5ada
+	fromColumn: fact_returns.ReturnDate
+	toColumn: dim_date.Date
+

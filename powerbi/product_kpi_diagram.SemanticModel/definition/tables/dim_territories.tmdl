@@ -1,0 +1,50 @@
+table dim_territories
+	lineageTag: 1c80511f-1419-43b6-a9ba-e6e5c78eaf90
+
+	column TerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 8b3979b3-8c97-4893-8022-c12f2bc22949
+		summarizeBy: none
+		sourceColumn: TerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: a9f7ecd3-8141-4742-801c-bf8acd7895e9
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 02407aa6-c9ef-4ec7-979a-f6e9ac1a310b
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		lineageTag: 086d86c7-307a-4f65-81dd-667300f08204
+		dataCategory: County
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_territories = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-3b02f732-b794.cloud.databricks.com", "/sql/1.0/warehouses/01fbf6524d38f570", [Catalog="spark_airflow_adventure_work_project", Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    spark_airflow_adventure_work_project_Database = Source{[Name="spark_airflow_adventure_work_project",Kind="Database"]}[Data],
+				    gold_Schema = spark_airflow_adventure_work_project_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_territories_Table = gold_Schema{[Name="dim_territories",Kind="Table"]}[Data]
+				in
+				    dim_territories_Table
+

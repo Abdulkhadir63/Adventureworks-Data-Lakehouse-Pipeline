@@ -1,0 +1,60 @@
+table fact_returns
+	lineageTag: 24c55337-0062-496d-b3ed-e0a016f5c42c
+
+	column ReturnKey
+		dataType: string
+		lineageTag: 3da39961-653b-4975-bfc2-b8af2227d344
+		summarizeBy: none
+		sourceColumn: ReturnKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReturnDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 943c591a-83db-4de8-b197-0685d87e10d8
+		summarizeBy: none
+		sourceColumn: ReturnDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column TerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 9832e541-1dd4-45b2-8b41-2b162d6b24ee
+		summarizeBy: none
+		sourceColumn: TerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 77b1624f-0a57-4775-adab-4744e3d5d792
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReturnQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: ef69f896-df9d-4011-8108-03c1cb51f06a
+		summarizeBy: sum
+		sourceColumn: ReturnQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_returns = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-3b02f732-b794.cloud.databricks.com", "/sql/1.0/warehouses/01fbf6524d38f570", [Catalog="spark_airflow_adventure_work_project", Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    spark_airflow_adventure_work_project_Database = Source{[Name="spark_airflow_adventure_work_project",Kind="Database"]}[Data],
+				    gold_Schema = spark_airflow_adventure_work_project_Database{[Name="gold",Kind="Schema"]}[Data],
+				    fact_returns_Table = gold_Schema{[Name="fact_returns",Kind="Table"]}[Data]
+				in
+				    fact_returns_Table
+

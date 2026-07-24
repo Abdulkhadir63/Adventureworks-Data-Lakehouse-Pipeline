@@ -1,0 +1,127 @@
+table dim_customers
+	lineageTag: 52268afa-01c5-47f9-84cd-73502989e843
+
+	column CustomerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0910aa6c-8557-4236-ba3c-15753c72b38d
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prefix
+		dataType: string
+		lineageTag: f368aab3-fe4d-44ea-86cc-1b221ed623ed
+		summarizeBy: none
+		sourceColumn: Prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column FullName
+		dataType: string
+		lineageTag: 02d5e414-53fc-4860-b10b-0a8da1771d77
+		summarizeBy: none
+		sourceColumn: FullName
+
+		annotation SummarizationSetBy = Automatic
+
+	column BirthDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d5cf8c92-87e0-4f44-800a-45d20e282410
+		summarizeBy: none
+		sourceColumn: BirthDate
+
+		variation Variation
+			isDefault
+			relationship: cf2241e1-6af4-4c4a-a0db-9a74806b5d92
+			defaultHierarchy: LocalDateTable_ffe98ff6-617c-4b06-9de8-39447383b243.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MaritalStatus
+		dataType: string
+		lineageTag: 7b358f35-7e87-4f6b-ba06-f98e08923ff1
+		summarizeBy: none
+		sourceColumn: MaritalStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: d71e769c-f6f2-4b92-bca5-23aee3cb7e96
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		dataType: string
+		lineageTag: 4ec0c3cb-df5d-4b31-8a4c-e7dc7a0f9e5d
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnnualIncome
+		dataType: double
+		lineageTag: c6f16248-084b-4c99-80bc-cb61f38904c0
+		summarizeBy: sum
+		sourceColumn: AnnualIncome
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalChildren
+		dataType: int64
+		formatString: 0
+		lineageTag: 9d0d214c-41e9-4401-8afb-f6b4fe52f50a
+		summarizeBy: sum
+		sourceColumn: TotalChildren
+
+		annotation SummarizationSetBy = Automatic
+
+	column EducationLevel
+		dataType: string
+		lineageTag: 32307aea-acb7-42e2-ad31-5ebcf62a4c4f
+		summarizeBy: none
+		sourceColumn: EducationLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	column Occupation
+		dataType: string
+		lineageTag: 2be9590b-9e59-4648-8b7a-61b70d416339
+		summarizeBy: none
+		sourceColumn: Occupation
+
+		annotation SummarizationSetBy = Automatic
+
+	column HomeOwner
+		dataType: string
+		lineageTag: 7e835893-95ce-4f60-9a2c-d07af9ff6f12
+		summarizeBy: none
+		sourceColumn: HomeOwner
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_customers = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-3b02f732-b794.cloud.databricks.com", "/sql/1.0/warehouses/01fbf6524d38f570", [Catalog="spark_airflow_adventure_work_project", Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    spark_airflow_adventure_work_project_Database = Source{[Name="spark_airflow_adventure_work_project",Kind="Database"]}[Data],
+				    gold_Schema = spark_airflow_adventure_work_project_Database{[Name="gold",Kind="Schema"]}[Data],
+				    customers_Table = gold_Schema{[Name="customers",Kind="Table"]}[Data]
+				in
+				    customers_Table
+
+	changedProperty = Name
+

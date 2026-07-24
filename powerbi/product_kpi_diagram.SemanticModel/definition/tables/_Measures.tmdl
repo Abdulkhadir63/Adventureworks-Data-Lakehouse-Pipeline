@@ -1,0 +1,112 @@
+table _Measures
+	lineageTag: 6294310b-3087-4711-8999-a43f9f98b887
+
+	measure Revenue = SUM(fact_sales[Revenue])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: fc8f2bcb-888e-46de-ba1f-42037f50b5d0
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure Profit = SUM(fact_sales[Profit])
+		lineageTag: b6125330-422a-437c-acfb-ab4057aebacc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Profit Margin' = DIVIDE([Profit], [Revenue], 0)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: ee37f88a-743e-4554-90c5-dbad6f84d596
+
+	measure 'Total Orders' = DISTINCTCOUNT(fact_sales[OrderNumber])
+		formatString: 0
+		lineageTag: fff08d8f-90a4-4bc9-adeb-06ec392f321a
+
+	measure 'Total Quantity Sold' = SUM(fact_sales[OrderQuantity])
+		formatString: 0
+		lineageTag: 08da5a6d-767e-4747-81b7-eb4c87ab968a
+
+	measure 'Total Returned Quantity' = SUM(fact_returns[ReturnQuantity])
+		formatString: 0
+		lineageTag: 625e6f81-c77d-4dd4-b2f6-062259b0b957
+
+	measure 'Return Rate' = DIVIDE([Total Returned Quantity], [Total Quantity Sold], 0)
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: e8403cb4-e4b3-44c7-8d14-92e9aa8e9c0d
+
+	measure 'Revenue LY' = ```
+			
+			CALCULATE(
+			    [Revenue], 
+			    SAMEPERIODLASTYEAR(dim_date[Date])
+			)
+			```
+		lineageTag: 56ef35ef-71e9-4db3-a471-ca46c39fce68
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Revenue YoY %' =
+			
+			DIVIDE([Revenue] - [Revenue LY], [Revenue LY], 0)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 4274a59d-14d2-4f41-a3aa-ddb903fe5c54
+
+	measure 'Profit LY' = ```
+			
+			CALCULATE(
+			    [Profit], 
+			    SAMEPERIODLASTYEAR(dim_date[Date])
+			)
+			```
+		lineageTag: 3e616e42-543b-4f50-97ee-d8e82a521b24
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Profit YoY %' =
+			
+			DIVIDE([Profit] - [Profit LY], [Profit LY], 0)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 86ee8260-48af-4265-9226-655d4a3250b6
+
+	measure 'Total Customers' = DISTINCTCOUNT(fact_sales[CustomerKey])
+		formatString: 0
+		lineageTag: 040e41fb-e4de-49c4-959b-3d629fbcb879
+
+	measure 'Avg Order Value' = DIVIDE([Revenue], [Total Orders], 0)
+		lineageTag: b5414f25-8b3e-4cee-b5e8-48aaca8b0978
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Countries' = DISTINCTCOUNT(dim_territories[Country])
+		formatString: 0
+		lineageTag: fd4cd688-19b4-4f8f-bfc7-9c3e09d01b22
+
+	measure 'Total Regions' = DISTINCTCOUNT(dim_territories[Region])
+		formatString: 0
+		lineageTag: e7c0c4c7-e169-4290-8a85-979f36795f17
+
+	measure 'Total Return Orders' = DISTINCTCOUNT(fact_returns[ReturnKey])
+		formatString: 0
+		lineageTag: a37a08ae-c212-488f-bb32-b5afb8950a1c
+
+	measure 'Total Return Amount' =
+			
+			SUMX(
+			    fact_returns,
+			    fact_returns[ReturnQuantity] * RELATED(dim_products[ProductPrice])
+			)
+		lineageTag: c63012d4-00eb-4a63-8a19-47ff8508b125
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				  Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				  #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

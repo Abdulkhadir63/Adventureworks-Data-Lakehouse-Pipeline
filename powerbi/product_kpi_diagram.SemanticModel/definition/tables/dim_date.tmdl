@@ -1,0 +1,95 @@
+table dim_date
+	lineageTag: 9ac5240f-327a-416b-8ea7-45e43782d80c
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 82ab7c7b-58c6-4e46-a4ef-412e16eefacf
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 6bff18fe-1a03-4132-9ebc-5611d2737ca3
+			defaultHierarchy: LocalDateTable_22ed8326-62ad-4a2e-9b8c-db886f0f31a0.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: c22f40dc-9e77-4e02-8787-28b8128edcbe
+		summarizeBy: sum
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 0d4a8d3a-5e5b-4b08-b7e8-4d089747bdaf
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b9a44de-08b8-4ca3-b0a2-298f4d2a92f0
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 316efd76-6342-438d-9ba8-cdd3bcb1be0b
+		summarizeBy: sum
+		sourceColumn: DayOfMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		dataType: string
+		lineageTag: 447f5b1b-95db-43a2-96b2-4c9575a2fd09
+		summarizeBy: none
+		sourceColumn: DayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWeekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a9ef47da-3e70-44b3-bcb4-dc3d04bd6d04
+		summarizeBy: none
+		sourceColumn: IsWeekend
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName = ```
+			FORMAT(dim_date[Date], "MMM")
+			
+			```
+		lineageTag: eb627c7d-534e-400f-9669-d3fa0b81b4a5
+		summarizeBy: none
+		sortByColumn: Month
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-3b02f732-b794.cloud.databricks.com", "/sql/1.0/warehouses/01fbf6524d38f570", [Catalog="spark_airflow_adventure_work_project", Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    spark_airflow_adventure_work_project_Database = Source{[Name="spark_airflow_adventure_work_project",Kind="Database"]}[Data],
+				    gold_Schema = spark_airflow_adventure_work_project_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_date_Table = gold_Schema{[Name="dim_date",Kind="Table"]}[Data]
+				in
+				    dim_date_Table
+

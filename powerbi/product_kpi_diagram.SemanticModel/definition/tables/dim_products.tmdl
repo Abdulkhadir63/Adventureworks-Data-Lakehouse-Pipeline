@@ -1,0 +1,133 @@
+table dim_products
+	lineageTag: 3d2301db-2688-4ed3-9cd4-4c25e3892454
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 800fc497-68d7-4508-bff9-14042e6e2956
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		lineageTag: 0dfe999d-1962-4062-acf7-1d1ff3c9df5a
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSKU
+		dataType: string
+		lineageTag: 04048b37-03a3-4e51-8467-9282c24969e2
+		summarizeBy: none
+		sourceColumn: ProductSKU
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModelName
+		dataType: string
+		lineageTag: a490a4aa-387c-4960-8468-97847fb21854
+		summarizeBy: none
+		sourceColumn: ModelName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductDescription
+		dataType: string
+		lineageTag: 3d7edd5d-173d-4eb1-813e-a9e325f66510
+		summarizeBy: none
+		sourceColumn: ProductDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductColor
+		dataType: string
+		lineageTag: 23e3833f-880f-442c-a1f5-929d25499a3a
+		summarizeBy: none
+		sourceColumn: ProductColor
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSize
+		dataType: string
+		lineageTag: a651ce2f-5156-4265-acd6-d9f6ad45c651
+		summarizeBy: none
+		sourceColumn: ProductSize
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductStyle
+		dataType: string
+		lineageTag: 1a3aa983-3cff-4e4e-845a-9949d61361d0
+		summarizeBy: none
+		sourceColumn: ProductStyle
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductCategoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 8223c484-a42f-491e-af04-be573887fe46
+		summarizeBy: count
+		sourceColumn: ProductCategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CategoryName
+		dataType: string
+		lineageTag: 21027df5-0070-4c6b-aa29-c10867bb8d2c
+		summarizeBy: none
+		sourceColumn: CategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSubcategoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c4f111d-9b8a-4909-9ed3-7e5dbbd442b0
+		summarizeBy: count
+		sourceColumn: ProductSubcategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubcategoryName
+		dataType: string
+		lineageTag: 6b3f71a3-c28d-4206-9bd6-564393e810c0
+		summarizeBy: none
+		sourceColumn: SubcategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductCost
+		dataType: double
+		lineageTag: ad878229-7039-4798-a085-9e1f2cb97001
+		summarizeBy: sum
+		sourceColumn: ProductCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ProductPrice
+		dataType: double
+		lineageTag: 146d7163-d7a1-4e81-8696-2cbe04b2f108
+		summarizeBy: sum
+		sourceColumn: ProductPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_products = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-3b02f732-b794.cloud.databricks.com", "/sql/1.0/warehouses/01fbf6524d38f570", [Catalog="spark_airflow_adventure_work_project", Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    spark_airflow_adventure_work_project_Database = Source{[Name="spark_airflow_adventure_work_project",Kind="Database"]}[Data],
+				    gold_Schema = spark_airflow_adventure_work_project_Database{[Name="gold",Kind="Schema"]}[Data],
+				    dim_products_Table = gold_Schema{[Name="dim_products",Kind="Table"]}[Data]
+				in
+				    dim_products_Table
+

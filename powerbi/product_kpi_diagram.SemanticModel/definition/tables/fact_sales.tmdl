@@ -1,0 +1,144 @@
+table fact_sales
+	lineageTag: dcc27256-d558-4ccf-877f-86ca0e07d33a
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1a7455a1-e19f-44de-99cd-b7e36b916060
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column StockDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 89f19e22-4dc2-4fe5-93f3-aade7516c043
+		summarizeBy: none
+		sourceColumn: StockDate
+
+		variation Variation
+			isDefault
+			relationship: 652c57d4-4491-44a8-a7d1-aece9673f6f4
+			defaultHierarchy: LocalDateTable_9d084715-70e0-4958-a0e6-9918ac04d427.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OrderNumber
+		dataType: string
+		lineageTag: 49fe61ed-6e41-4ace-bb42-e6ad42f2b403
+		summarizeBy: none
+		sourceColumn: OrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: f51030f0-e990-48b6-b6d7-536a2004b11a
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		lineageTag: d931cca9-b31f-465d-b82a-5a138049b79d
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 01a2b949-610e-41d9-be61-2ba8c91dee53
+		summarizeBy: none
+		sourceColumn: TerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderLineItem
+		dataType: int64
+		formatString: 0
+		lineageTag: 42397ce2-997a-4c43-ab8f-0bcefeb1a06d
+		summarizeBy: sum
+		sourceColumn: OrderLineItem
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 9546809a-77b2-4398-97e4-14a8a4577317
+		summarizeBy: sum
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductPrice
+		dataType: double
+		lineageTag: 9e4a3742-873c-41b1-8656-5f593a222b89
+		summarizeBy: sum
+		sourceColumn: ProductPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ProductCost
+		dataType: double
+		lineageTag: da30f356-55ec-47d8-bd52-1a1971d66284
+		summarizeBy: sum
+		sourceColumn: ProductCost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Revenue
+		dataType: double
+		lineageTag: 613d0f75-0ac8-4874-8c6d-072dbcf8e93f
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cost
+		dataType: double
+		lineageTag: 1c0e83f3-e6f5-4d6b-b0d4-d877368d794b
+		summarizeBy: sum
+		sourceColumn: Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Profit
+		dataType: double
+		lineageTag: 565de04f-9111-4e0b-984d-babaf6a86783
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_sales = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("dbc-3b02f732-b794.cloud.databricks.com", "/sql/1.0/warehouses/01fbf6524d38f570", [Catalog="spark_airflow_adventure_work_project", Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation="2.0", Protocol=null]),
+				    spark_airflow_adventure_work_project_Database = Source{[Name="spark_airflow_adventure_work_project",Kind="Database"]}[Data],
+				    gold_Schema = spark_airflow_adventure_work_project_Database{[Name="gold",Kind="Schema"]}[Data],
+				    fact_sales_Table = gold_Schema{[Name="fact_sales",Kind="Table"]}[Data]
+				in
+				    fact_sales_Table
+
