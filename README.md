@@ -235,7 +235,7 @@ These dashboards allow business users to explore data interactively without quer
 
 ## 📷 Dashboard Preview
 
-<img src="docs/powerbi Visuals.png" width="100%" height="800" alt="Pipeline Architecture Diagram">
+<img src="docs/Powerbi Dashboard.png" width="100%" height="800" alt="Pipeline Architecture Diagram">
 
 ---
 
