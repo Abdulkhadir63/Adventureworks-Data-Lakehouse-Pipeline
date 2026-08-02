@@ -1,4 +1,4 @@
-<div style="text-align: center;"> #  AdventureWorks Data Engineering Pipeline </div>
+#  AdventureWorks Data Engineering Pipeline 
 
 <p align="center">
 
