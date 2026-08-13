@@ -1,39 +1,46 @@
 #  AdventureWorks Data Engineering Pipeline 
 
 <p align="center">
-
   <!-- Python -->
-
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="45" height="45"/>
-
+  <span style="display: inline-block; text-align: center; margin: 0 8px;">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="45" height="45"/><br/>
+    <sub style="font-size: 11px;"><b>Python</b></sub>
+  </span>
   <!-- Apache Airflow -->
-
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Apache Airflow" width="45" height="45"/>
-
+  <span style="display: inline-block; text-align: center; margin: 0 8px;">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Apache Airflow" width="45" height="45"/><br/>
+    <sub style="font-size: 11px;"><b>Airflow</b></sub>
+  </span>
   <!-- Databricks -->
-
-  <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks" width="45" height="45"/>
-
+  <span style="display: inline-block; text-align: center; margin: 0 8px;">
+    <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks" width="45" height="45"/><br/>
+    <sub style="font-size: 11px;"><b>Databricks</b></sub>
+  </span>
   <!-- Apache Spark -->
-
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg" alt="Apache Spark" width="45" height="45"/>
-
+  <span style="display: inline-block; text-align: center; margin: 0 8px;">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg" alt="Apache Spark" width="45" height="45"/><br/>
+    <sub style="font-size: 11px;"><b>Spark</b></sub>
+  </span>
   <!-- AWS S3 -->
-
-  <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS" width="45" height="45"/>
-
+  <span style="display: inline-block; text-align: center; margin: 0 8px;">
+    <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS" width="45" height="45"/><br/>
+    <sub style="font-size: 11px;"><b>AWS S3</b></sub>
+  </span>
   <!-- Power BI -->
-
-  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" width="45" height="45"/>
-
+  <span style="display: inline-block; text-align: center; margin: 0 8px;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" width="45" height="45"/><br/>
+    <sub style="font-size: 11px;"><b>Power BI</b></sub>
+  </span>
   <!-- Docker -->
-
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="45" height="45"/>
-
+  <span style="display: inline-block; text-align: center; margin: 0 8px;">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="45" height="45"/><br/>
+    <sub style="font-size: 11px;"><b>Docker</b></sub>
+  </span>
   <!-- GitHub Actions -->
-
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GitHub Actions" width="45" height="45"/>
-
+  <span style="display: inline-block; text-align: center; margin: 0 8px;">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GitHub Actions" width="45" height="45"/><br/>
+    <sub style="font-size: 11px;"><b>GH Actions</b></sub>
+  </span>
 </p>
 
 ---
