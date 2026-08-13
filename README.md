@@ -1,4 +1,4 @@
-#  AdventureWorks Data Engineering Pipeline 
+# AdventureWorks Data Engineering Pipeline 
 <center>
 <table border="0">
   <tr>
