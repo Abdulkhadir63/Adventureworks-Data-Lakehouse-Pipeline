@@ -31,8 +31,8 @@
       <sub><b>Docker</b></sub>
     </td>
     <td align="center" width="95">
-      <img src="https://www.vectorlogo.zone/logos/deltaio/deltaio-icon.svg" alt="Delta Lake" width="40" height="40"/><br/>
-      <sub><b>Delta Lake</b></sub>
+      <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS IAM" width="40" height="40"/><br/>
+      <sub><b>AWS IAM</b></sub>
     </td>
     <td align="center" width="90">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GH Actions" width="40" height="40"/><br/>
