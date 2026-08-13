@@ -26,6 +26,10 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" width="40" height="40"/><br/>
       <sub><b>Power BI</b></sub>
     </td>
+    <td align="center" width="95">
+      <img src="https://www.vectorlogo.zone/logos/diagramsnet/diagramsnet-icon.svg" alt="draw.io" width="40" height="40"/><br/>
+      <sub><b>draw.io</b></sub>
+    </td>
     <td align="center" width="90">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="40" height="40"/><br/>
       <sub><b>Docker</b></sub>
