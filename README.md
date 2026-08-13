@@ -54,7 +54,7 @@ This repository contains my first end-to-end Data Engineering project.
 
 I built this project to understand how a modern batch data pipeline works in a real-world environment. Instead of learning each tool separately, I wanted to connect everything together—from data ingestion to reporting.
 
-The project starts by extracting data from AdventureWorks platform and convert them into csv and load them into S3 and second fase was reading raw AdventureWorks data from AWS S3. Apache Airflow orchestrates the pipeline, Databricks processes the data using PySpark, Delta Lake stores each Medallion layer, and the final Gold tables are used to build Power BI dashboards.
+The project starts by extracting data from the AdventureWorks platform, converting it into CSV files, and loading them into AWS S3. The second phase involves reading raw AdventureWorks data from S3. Apache Airflow orchestrates the pipeline, Databricks processes the data using PySpark, Delta Lake stores each Medallion layer, and the final Gold tables are used to build Power BI dashboards.
 
 While building this project, my goal wasn't just to make the pipeline work. I wanted to learn how different components work together, how data flows through each layer, and how Data Engineers design reliable and maintainable pipelines.
 
@@ -65,7 +65,7 @@ This project covers:
 - Apache Airflow orchestration
 - Databricks Workflows
 - Delta Lake MERGE operations
-- Incremental data processing
+- Stateful high-water mark timestamp-based incremental processing
 - Data quality validation
 - Star Schema data modeling
 - Databricks SQL Warehouse
@@ -81,7 +81,7 @@ Although this is a portfolio project, I tried to follow production-inspired prac
 
 I created this project to challenge myself with a complete Data Engineering workflow instead of building small isolated examples.
 
-During this project I learned how data moves through a modern data platform, how orchestration works, how Delta Lake handles incremental data, how to model analytical data, and how to deliver business-ready datasets for reporting.
+During this project I learned how data moves through a modern data platform, how orchestration works, how Delta Lake handles incremental data via high-water mark timestamps, how to model analytical data, and how to deliver business-ready datasets for reporting.
 
 More importantly, I learned how to debug failures, improve pipeline design, and think about Data Engineering beyond writing code.
 
@@ -99,21 +99,23 @@ If you have suggestions, advice, or would simply like to connect and discuss Dat
 
 I'm always open to learning from experienced engineers and improving my work.
 
+---
+
 # 🏗️ Project Architecture
 
 One of the main goals of this project was to understand how data moves through a complete Data Engineering pipeline. Instead of processing everything in a single script, I followed the Medallion Architecture to organize the data into different layers, making the pipeline easier to maintain, debug, and scale.
 
-The pipeline starts when raw AdventureWorks CSV files are uploaded to an AWS S3 bucket. Apache Airflow monitors and orchestrates the workflow, while Databricks Workflows execute the PySpark notebooks responsible for processing each layer of the pipeline.
+The pipeline starts when raw AdventureWorks CSV files are uploaded to an AWS S3 bucket. Apache Airflow monitors and orchestrates the workflow using lightweight S3 sensors, while Databricks Workflows execute the PySpark notebooks responsible for processing each layer of the pipeline.
 
 Each layer has a specific responsibility:
 
 ### 🥉 Bronze Layer
 
-The Bronze layer stores the raw source data exactly as it arrives from Amazon S3.
+The Bronze layer stores the raw source data exactly as it arrives from Amazon S3 into Delta Lake format.
 
 At this stage I don't perform any business transformations. The main goal is to preserve the original data so it can always be traced back if something goes wrong later in the pipeline.
 
-I also add ingestion metadata such as processing timestamps and a `pipeline_run_id` that allows the pipeline to process data incrementally.
+I also add ingestion metadata such as `ingestion_timestamp` and `source_file_name` to maintain accurate data lineage.
 
 ---
 
@@ -121,9 +123,9 @@ I also add ingestion metadata such as processing timestamps and a `pipeline_run_
 
 The Silver layer is where the data starts becoming useful.
 
-In this layer I clean inconsistent values, standardize data types, remove duplicates, and apply business transformations using PySpark.
+In this layer I clean inconsistent values, standardize data types, remove duplicates, enforce schema integrity, and apply business transformations using PySpark.
 
-Instead of rewriting the entire dataset every time, I use Delta Lake MERGE operations to perform incremental updates based on the current pipeline run.
+To optimize processing efficiency, I implemented a stateful incremental ingestion model using high-water mark timestamps (`silver_processed_timestamp`). Instead of reprocessing the whole dataset, Delta Lake MERGE operations run against newly ingested records based on timestamp thresholds.
 
 ---
 
@@ -135,7 +137,7 @@ The purpose of this layer is to detect common data quality issues before they re
 
 Some of the validations include:
 
-- Checking for null values in important columns
+- Checking for null values in important primary keys
 - Verifying numeric values are valid
 - Detecting duplicate records
 - Logging validation results for every pipeline execution
@@ -160,10 +162,7 @@ The final Gold tables are published through Databricks SQL Warehouse, allowing P
 
 The complete workflow follows the architecture below.
 
-
 <img src="docs/Architecture Diagram.png" width="100%" height="750" alt="Pipeline Architecture Diagram">
-
-
 
 This separation allows each layer to have a single responsibility, making the pipeline easier to maintain and extend in the future.
 
@@ -173,14 +172,13 @@ This separation allows each layer to have a single responsibility, making the pi
 
 One thing I wanted to avoid was reprocessing the entire dataset every time the pipeline runs.
 
-To solve this, I implemented incremental processing using a unique `pipeline_run_id`.
+To solve this, I implemented stateful high-water mark timestamp tracking (`silver_processed_timestamp`).
 
-Each pipeline execution processes only the newly ingested records, which are then merged into Delta Lake tables using MERGE operations.
+During each run, the pipeline queries the target Delta Lake table for the max timestamp threshold, reads only newly landed records, and merges them atomically into the Delta Lake tables using MERGE (`UPSERT`) statements.
 
-This approach reduces unnecessary processing while keeping the data up to date.
+This approach eliminates unnecessary re-computation while ensuring absolute data consistency.
 
 ---
-
 
 # 🛠️ Technologies Used
 
@@ -188,17 +186,19 @@ This project helped me gain hands-on experience with several tools commonly used
 
 | Tool | Purpose |
 |------|---------|
-| Python | Pipeline development |
-| PySpark | Distributed data processing |
-| Apache Airflow | Workflow orchestration |
-| Databricks Workflows | Notebook execution |
-| Delta Lake | ACID storage & incremental MERGE |
-| AWS S3 | Raw data storage |
-| Unity Catalog | Table management |
-| Databricks SQL Warehouse | SQL endpoint for reporting |
-| Power BI | Dashboard creation |
-| Docker | Local Airflow environment |
-| GitHub Actions | Continuous Integration |
+| Python | Pipeline development & scripting |
+| PySpark | Distributed data processing engine |
+| Apache Airflow | Workflow orchestration & scheduling |
+| Databricks Workflows | Cloud cluster job execution |
+| Delta Lake | ACID storage & high-water mark MERGE |
+| AWS S3 | Raw data storage / landing zone |
+| AWS IAM | Access management and security policies |
+| Unity Catalog | Data governance & table management |
+| Databricks SQL Warehouse | SQL endpoint for Power BI |
+| Power BI | Visual reporting & dashboard creation |
+| Docker | Local Airflow environment isolation |
+| GitHub Actions | CI/CD automated testing |
+| draw.io | Architecture & schema diagramming |
 
 ---
 
@@ -210,14 +210,16 @@ Some of my biggest takeaways were:
 
 - Breaking a large pipeline into small, maintainable layers.
 - Understanding why orchestration is just as important as transformation.
-- Designing incremental pipelines instead of full refresh pipelines.
+- Designing stateful timestamp-driven incremental pipelines instead of full refresh pipelines.
 - Building a dimensional model for analytics.
 - Thinking about data quality before reporting.
 - Using GitHub Actions to automatically validate changes.
 - Documenting architecture instead of only writing code.
 
 Building this project helped me understand how different Data Engineering tools work together to solve a complete business problem instead of learning them in isolation.
+
 ---
+
 # 📊 Data Warehouse Design
 
 After transforming and validating the data, I built a Star Schema in the Gold layer to make reporting faster and easier.
@@ -242,7 +244,7 @@ This structure makes it simple to analyze business metrics such as sales, profit
 
 ## ⭐ Star Schema
 
- <img src="docs/Start_Schema_diagram.png" width="100%" height="600" alt="Pipeline Architecture Diagram">
+<img src="docs/Start_Schema_diagram.png" width="100%" height="600" alt="Star Schema Diagram">
 
 ---
 
@@ -267,7 +269,7 @@ These dashboards allow business users to explore data interactively without quer
 
 ## 📷 Dashboard Preview
 
-<img src="docs/Powerbi Dashboard.png" width="100%" height="800" alt="Pipeline Architecture Diagram">
+<img src="docs/Powerbi Dashboard.png" width="100%" height="800" alt="Dashboard Preview">
 
 ---
 
@@ -310,7 +312,7 @@ Adventureworks-Data-Engineering-Pipeline
 │   └── gold/
 │
 ├── docs/
-│── Dataset/
+├── Dataset/
 ├── powerbi/
 │
 ├── Dockerfile
@@ -321,8 +323,6 @@ Adventureworks-Data-Engineering-Pipeline
 ```
 
 Keeping the repository organized made it much easier to work on different parts of the project independently and reflects how I wanted to structure a real-world Data Engineering project.
-
----
 
 # 💭 Engineering Decisions
 
@@ -336,15 +336,11 @@ I chose the Medallion Architecture because it separates raw, cleaned, and busine
 
 This makes the pipeline easier to debug, maintain, and extend. If an issue occurs, I can quickly identify which layer introduced the problem without affecting the rest of the pipeline.
 
----
-
 ### Why Apache Airflow?
 
 Instead of manually running notebooks, I used Apache Airflow to orchestrate the pipeline.
 
-This helped me understand how production pipelines manage task dependencies, retries, scheduling, logging, and monitoring.
-
----
+This helped me understand how production pipelines manage task dependencies, retries, scheduling, logging, and monitoring using sensors like `S3KeySensor` in `reschedule` mode to minimize resource consumption.
 
 ### Why Databricks?
 
@@ -352,23 +348,17 @@ I used Databricks because it provides an environment for running distributed PyS
 
 It also allowed me to learn workflows, notebooks, SQL Warehouse, and Unity Catalog in a single platform.
 
----
-
 ### Why Delta Lake?
 
 Delta Lake provides ACID transactions and supports MERGE operations, making incremental updates much easier than rewriting entire datasets.
 
 Using Delta tables also helped me understand how modern Lakehouse architectures manage reliable data pipelines.
 
----
+### Why High-Water Mark Timestamp Incremental Ingestion?
 
-### Why Incremental Processing?
+Reprocessing the entire dataset every time is inefficient and slow at scale.
 
-Reprocessing the entire dataset every time is inefficient.
-
-To avoid unnecessary work, I implemented incremental processing using a `pipeline_run_id`. Each pipeline execution processes only the newly ingested data before merging it into the target tables.
-
----
+To avoid unnecessary compute costs, I implemented high-water mark timestamping (`silver_processed_timestamp`). Each pipeline execution filters for records newer than the last max processed timestamp before merging into target Delta tables.
 
 ### Why Validate Data Separately?
 
@@ -376,15 +366,11 @@ I wanted data quality checks to be independent from transformations.
 
 Keeping validation as its own step makes the pipeline easier to troubleshoot and prevents invalid data from reaching the reporting layer.
 
----
-
 ### Why a Star Schema?
 
 The reporting layer is designed using a Star Schema because it simplifies analytical queries and works well with BI tools like Power BI.
 
 Instead of exposing raw transactional data, business users can work with clean fact and dimension tables.
-
----
 
 ### Why Power BI for KPIs?
 
@@ -392,19 +378,17 @@ I chose to calculate KPIs in Power BI using DAX instead of storing them inside t
 
 This keeps the engineering pipeline focused on preparing reliable datasets while allowing the reporting layer to handle business calculations and visualizations.
 
----
-
 # 🚧 Challenges I Faced
 
 Building this project wasn't always straightforward. Along the way I ran into several issues that pushed me to understand the tools more deeply.
 
 Some of the challenges included:
 
-- Setting up Apache Airflow locally with Docker.
-- Connecting Airflow to Databricks Workflows.
-- Learning Delta Lake MERGE operations.
+- Setting up Apache Airflow locally with Docker and managing environment connections securely via JSON environment variables.
+- Connecting Airflow to Databricks Workflows using REST APIs and configuring correct token authentication.
+- Learning Delta Lake MERGE operations and stateful high-water mark timestamp logic.
 - Designing a Star Schema from transactional data.
-- Implementing incremental processing.
+- Implementing efficient incremental processing.
 - Handling data quality validation.
 - Organizing the project into a maintainable structure.
 - Understanding how all the technologies work together in a single pipeline.
@@ -413,26 +397,22 @@ Most of these problems required reading documentation, experimenting with differ
 
 Although solving these issues took time, they became some of the most valuable learning experiences during this project.
 
----
-
 # 🚀 Future Improvements
 
 Although the project is complete, there are several areas I'd like to explore in future versions.
 
 Some ideas include:
 
-- Migrating the pipeline to a cloud-based Airflow deployment.
-- Adding automated unit and integration tests.
-- Implementing data lineage.
-- Adding monitoring and alerting.
+- Migrating the pipeline to a cloud-based Airflow deployment (e.g., AWS MWAA).
+- Adding automated unit tests (pytest) and integration tests.
+- Implementing data lineage tracking via Unity Catalog.
+- Adding monitoring and alerting (Slack/Email callbacks on task failure).
 - Supporting multiple source systems.
-- Introducing Infrastructure as Code (Terraform).
+- Introducing Infrastructure as Code (Terraform) for AWS S3 and Databricks resources.
 - Exploring streaming pipelines with Spark Structured Streaming.
 - Expanding the project with cloud-native services.
 
 I see this project as the foundation for future learning rather than a finished product.
-
----
 
 # 🎓 What I Learned
 
@@ -443,8 +423,6 @@ It helped me understand how different parts of a Data Engineering platform fit t
 More importantly, I learned that building a reliable pipeline involves much more than transformations. It requires planning, organization, testing, debugging, documentation, and continuously improving the solution.
 
 This project gave me confidence to continue learning and build more complex Data Engineering solutions in the future.
-
----
 
 # 🤝 Feedback & Suggestions
 
@@ -458,18 +436,15 @@ Feel free to connect with me on **LinkedIn**—I'm always happy to learn from ot
 
 Thank you for taking the time to explore my project! 🚀
 
----
 # 🚀 Getting Started
 
 If you'd like to explore or run this project on your own machine, follow the steps below.
-
----
 
 # 📋 Prerequisites
 
 Before getting started, make sure you have the following installed:
 
-- Python 
+- Python
 - Docker Desktop
 - Git
 - AWS Account
@@ -482,23 +457,23 @@ You'll also need:
 - A Databricks Personal Access Token (PAT)
 - Access to a Databricks SQL Warehouse
 
----
-
 # 📥 Clone the Repository
 
+Bash
+
 ```bash
-git clone 
+git clone https://github.com/your-username/Adventureworks-Data-Engineering-Pipeline.git
 
 cd Adventureworks-Data-Engineering-Pipeline
 ```
-
----
 
 # ⚙️ Configure Environment Variables
 
 This project uses environment variables for credentials and configuration.
 
 Create a `.env` file by copying the example configuration:
+
+Bash
 
 ```bash
 cp .env.example .env
@@ -508,30 +483,25 @@ Update the `.env` file with your own values.
 
 Example:
 
-```env
+Code snippet
+
+```text
 AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY
 AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_KEY
-AWS_DEFAULT_REGION=YOUR_REGION
+AWS_DEFAULT_REGION=ap-south-1
 
-DATABRICKS_HOST=https://<your-workspace>.cloud.databricks.com
-DATABRICKS_TOKEN=YOUR_DATABRICKS_PAT
+AIRFLOW_CONN_DATABRICKS_DEFAULT='{"conn_type": "databricks", "host": "https://<your-workspace>.cloud.databricks.com", "extra": {"token": "YOUR_DATABRICKS_PAT"}}'
 
 FERNET_KEY=YOUR_FERNET_KEY
 ```
 
 > **Note:** Never commit your `.env` file or personal credentials to GitHub.
 
----
-
 # 🐳 Start Apache Airflow
 
 Build and start the Airflow services using Docker Compose.
 
-```bash
-docker compose up --build
-```
-
-To run in detached mode:
+Bash
 
 ```bash
 docker compose up -d --build
@@ -539,13 +509,13 @@ docker compose up -d --build
 
 Once the containers are running, open your browser and navigate to:
 
-```
+Plaintext
+
+```text
 http://localhost:8085
 ```
 
 Login using the credentials configured in your Airflow environment.
-
----
 
 # ☁️ Configure AWS S3
 
@@ -554,6 +524,8 @@ Login using the credentials configured in your Airflow environment.
 3. Update any bucket references in the project configuration if needed.
 
 Example folder structure:
+
+Plaintext
 
 ```text
 airflow-spark-project/
@@ -576,8 +548,6 @@ airflow-spark-project/
 └── configs/
 ```
 
----
-
 # 🧱 Configure Databricks
 
 Before running the pipeline:
@@ -585,28 +555,24 @@ Before running the pipeline:
 - Create a Databricks Workspace.
 - Import the notebooks from the `databricks/` folder.
 - Create a Databricks Workflow (Job).
-- Attach a compute cluster or use Serverless Compute (if available).
-- Update the Airflow connection with your Databricks workspace details.
-- Configure the correct Job ID in the Airflow DAG.
-
----
+- Attach a compute cluster or use Serverless Compute.
+- Update the Airflow connection (`databricks_default`) with your Databricks workspace details.
+- Configure the correct Job ID (`DATABRICKS_JOB_ID`) in the Airflow DAG.
 
 # ▶️ Run the Pipeline
 
 Once everything is configured:
 
 1. Upload source files to Amazon S3.
-2. Trigger the Airflow DAG.
-3. Airflow starts the Databricks Workflow.
-4. Data flows through:
-   - Bronze
-   - Silver
-   - Validation
-   - Gold
+2. Trigger the Airflow DAG (`adventure_works_fullLoad_bronze`).
+3. Airflow senses incoming CSV files and triggers the Databricks Workflow.
+4. Data flows sequentially through:
+   - Bronze Layer
+   - Silver Layer
+   - Validation Layer
+   - Gold Layer
 5. Gold tables are available in Databricks SQL Warehouse.
 6. Connect Power BI to the SQL Warehouse and refresh the dashboard.
-
----
 
 # 📊 Open the Power BI Dashboard
 
@@ -614,15 +580,11 @@ Open the `.pbix` file located in the `powerbi/` directory.
 
 Update the connection details if necessary and refresh the dataset to load the latest Gold tables.
 
----
-
 # 🧪 CI/CD
 
 GitHub Actions automatically validates the project whenever changes are pushed to the repository.
 
 You can view workflow execution under the **Actions** tab in GitHub.
-
----
 
 # 🤝 Contributing
 
@@ -636,22 +598,22 @@ If you notice a bug, discover a better approach, or have ideas to improve the pr
 
 Every suggestion is an opportunity for me to learn something new.
 
----
-
 # 📬 Connect With Me
 
 If you'd like to discuss Data Engineering, share feedback, or simply connect, feel free to reach out.
 
-- **LinkedIn:** www.linkedin.com/in/abdul-khadir-44876735a
-- **Instagram:** https://www.instagram.com/abdulkm_63?igsh=Ymo4cnowcXhjMHVv
+- **LinkedIn:** [https://www.linkedin.com/in/abdul-khadir-44876735a](https://www.google.com/search?q=https://www.linkedin.com/in/abdul-khadir-44876735a)
+- **Instagram:** [https://www.instagram.com/abdulkm\_63](https://www.google.com/search?q=https://www.instagram.com/abdulkm_63)
 
 I'm always happy to connect with people who are passionate about Data Engineering and continuous learning.
-
----
 
 # ⭐ Support
 
 If you found this project helpful or interesting, consider giving it a ⭐ on GitHub.
+
+It motivates me to continue building projects, learning new technologies, and sharing my journey with the community.
+
+Thank you for visiting my repository! 🚀
 
 It motivates me to continue building projects, learning new technologies, and sharing my journey with the community.
 
