@@ -11,7 +11,7 @@
       <sub><b>Airflow</b></sub>
     </td>
     <td align="center" width="95">
-      <img src="https://cdn.simpleicons.org/databricks/FF3621" alt="Databricks" width="40" height="40"/><br/>
+      <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks" width="40" height="40"/><br/>
       <sub><b>Databricks</b></sub>
     </td>
     <td align="center" width="95">
@@ -19,17 +19,17 @@
       <sub><b>PySpark</b></sub>
     </td>
     <td align="center" width="95">
-      <img src="https://cdn.simpleicons.org/deltalake/0052CC" alt="Delta Lake" width="40" height="40"/><br/>
+      <img src="https://www.vectorlogo.zone/logos/deltalakeio/deltalakeio-icon.svg" alt="Delta Lake" width="40" height="40"/><br/>
       <sub><b>Delta Lake</b></sub>
     </td>
     <td align="center" width="95">
-      <img src="https://cdn.simpleicons.org/amazons3/569A31" alt="AWS S3" width="40" height="40"/><br/>
+      <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS S3" width="40" height="40"/><br/>
       <sub><b>AWS S3</b></sub>
     </td>
   </tr>
   <tr>
     <td align="center" width="95">
-      <img src="https://cdn.simpleicons.org/amazoniam/DD344C" alt="AWS IAM" width="40" height="40"/><br/>
+      <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS IAM" width="40" height="40"/><br/>
       <sub><b>AWS IAM</b></sub>
     </td>
     <td align="center" width="95">
@@ -45,7 +45,7 @@
       <sub><b>GH Actions</b></sub>
     </td>
     <td align="center" width="95">
-      <img src="https://cdn.simpleicons.org/diagramsnet/F08705" alt="draw.io" width="40" height="40"/><br/>
+      <img src="https://www.vectorlogo.zone/logos/diagramsnet/diagramsnet-icon.svg" alt="draw.io" width="40" height="40"/><br/>
       <sub><b>draw.io</b></sub>
     </td>
   </tr>
