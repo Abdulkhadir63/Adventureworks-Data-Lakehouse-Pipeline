@@ -13,10 +13,6 @@
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Airflow" width="45" height="45"/>
   <!-- AWS -->
   <img src="https://cdn.simpleicons.org/amazonaws/FF9900" alt="AWS" width="45" height="45"/>
-  <!-- Kafka -->
-  <img src="https://cdn.simpleicons.org/apachekafka/white" alt="Kafka" width="45" height="45"/>
-  <!-- Snowflake -->
-  <img src="https://cdn.simpleicons.org/snowflake" alt="Snowflake" width="45" height="45"/>
 </p> 
 
 ---
