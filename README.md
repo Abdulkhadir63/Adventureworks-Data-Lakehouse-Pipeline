@@ -3,17 +3,23 @@
 <p align="center">
   <!-- Python -->
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="45" height="45"/>
-  <!-- SQL -->
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" alt="SQL" width="45" height="45"/>
-  <!-- PySpark -->
-  <img src="https://cdn.simpleicons.org/apachespark/E25A1C" alt="PySpark" width="45" height="45"/>
+  <!-- Apache Airflow -->
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Apache Airflow" width="45" height="45"/>
   <!-- Databricks -->
-  <img src="https://cdn.simpleicons.org/databricks" alt="Databricks" width="45" height="45"/>
-  <!-- Airflow -->
-  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Airflow" width="45" height="45"/>
-  <!-- AWS -->
-  <img src="https://cdn.simpleicons.org/amazons3/FF9900" alt="AWS S3" width="45" height="45"/>
-</p> 
+  <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks" width="45" height="45"/>
+  <!-- Apache Spark -->
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg" alt="Apache Spark" width="45" height="45"/>
+  <!-- Delta Lake -->
+  <img src="https://www.vectorlogo.zone/logos/delta_io/delta_io-icon.svg" alt="Delta Lake" width="45" height="45"/>
+  <!-- AWS S3 -->
+  <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS" width="45" height="45"/>
+  <!-- Power BI -->
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" width="45" height="45"/>
+  <!-- Docker -->
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="45" height="45"/>
+  <!-- GitHub Actions -->
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GitHub Actions" width="45" height="45"/>
+</p>
 
 ---
 
