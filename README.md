@@ -1,50 +1,51 @@
-# AdventureWorks Data Engineering Pipeline 
----
+#  AdventureWorks Data Engineering Pipeline 
+<center>
 <table border="0">
   <tr>
-    <td align="center" width="95">
+    <td align="center" width="90">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/><br/>
       <sub><b>Python</b></sub>
     </td>
-    <td align="center" width="95">
+    <td align="center" width="90">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Airflow" width="40" height="40"/><br/>
       <sub><b>Airflow</b></sub>
     </td>
-    <td align="center" width="95">
+    <td align="center" width="90">
       <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks" width="40" height="40"/><br/>
       <sub><b>Databricks</b></sub>
     </td>
-    <td align="center" width="95">
+    <td align="center" width="90">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg" alt="Spark" width="40" height="40"/><br/>
-      <sub><b>PySpark</b></sub>
+      <sub><b>Spark</b></sub>
     </td>
     <td align="center" width="95">
-      <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg"" alt="Delta Lake" width="40" height="40"/><br/>
+      <img src="https://cdn.simpleicons.org/databricks/FF3621" alt="Databricks" width="40" height="40"/><br/>
       <sub><b>Delta Lake</b></sub>
     </td>
-    <td align="center" width="95">
+    <td align="center" width="90">
       <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS S3" width="40" height="40"/><br/>
       <sub><b>AWS S3</b></sub>
     </td>
-  </tr>
-  <tr>
-    <td align="center" width="95">
-      <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS IAM" width="40" height="40"/><br/>
-      <sub><b>AWS IAM</b></sub>
-    </td>
-    <td align="center" width="95">
+    <td align="center" width="90">
       <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" width="40" height="40"/><br/>
       <sub><b>Power BI</b></sub>
     </td>
-    <td align="center" width="95">
+    <td align="center" width="90">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="40" height="40"/><br/>
       <sub><b>Docker</b></sub>
     </td>
     <td align="center" width="95">
+      <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS IAM" width="40" height="40"/><br/>
+      <sub><b>AWS IAM</b></sub>
+    </td>
+    </td>
+    <td align="center" width="90">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GH Actions" width="40" height="40"/><br/>
       <sub><b>GH Actions</b></sub>
+    </td>
   </tr>
 </table>
+  </center>
 ---
 
 # 📖 About This Project
@@ -241,7 +242,7 @@ This structure makes it simple to analyze business metrics such as sales, profit
 
 ## ⭐ Star Schema
 
- <img src="docs/Start_Schema_diagram.png" width="100%" height="600" alt="Pipeline Architecture Diagram">
+ <img src="docs/Start_Schema_diagram.png" width="100%" height="600" alt="Pipeline Architecture Diagram">
 
 ---
 
@@ -297,16 +298,16 @@ The project is organized to keep orchestration, data processing, documentation, 
 Adventureworks-Data-Engineering-Pipeline
 │
 ├── .github/
-│   └── workflows/
+│   └── workflows/
 │
 ├── dags/
-│   └── adventure_work_project/
+│   └── adventure_work_project/
 │
 ├── databricks/
-│   ├── bronze/
-│   ├── silver/
-│   ├── validation/
-│   └── gold/
+│   ├── bronze/
+│   ├── silver/
+│   ├── validation/
+│   └── gold/
 │
 ├── docs/
 │── Dataset/
@@ -468,7 +469,7 @@ If you'd like to explore or run this project on your own machine, follow the ste
 
 Before getting started, make sure you have the following installed:
 
-- Python 
+- Python 
 - Docker Desktop
 - Git
 - AWS Account
@@ -486,7 +487,7 @@ You'll also need:
 # 📥 Clone the Repository
 
 ```bash
-git clone 
+git clone 
 
 cd Adventureworks-Data-Engineering-Pipeline
 ```
@@ -558,14 +559,14 @@ Example folder structure:
 airflow-spark-project/
 
 ├── incoming/
-│   ├── customers/
-│   ├── products/
-│   ├── sales/
-│   ├── returns/
-│   ├── territories/
-│   ├── calendar/
-│   ├── product_category/
-│   └── product_sub_category/
+│   ├── customers/
+│   ├── products/
+│   ├── sales/
+│   ├── returns/
+│   ├── territories/
+│   ├── calendar/
+│   ├── product_category/
+│   └── product_sub_category/
 │
 ├── bronze/
 ├── silver/
@@ -598,10 +599,10 @@ Once everything is configured:
 2. Trigger the Airflow DAG.
 3. Airflow starts the Databricks Workflow.
 4. Data flows through:
-   - Bronze
-   - Silver
-   - Validation
-   - Gold
+   - Bronze
+   - Silver
+   - Validation
+   - Gold
 5. Gold tables are available in Databricks SQL Warehouse.
 6. Connect Power BI to the SQL Warehouse and refresh the dashboard.
 
