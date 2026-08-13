@@ -19,7 +19,7 @@
   <img src="https://cdn.simpleicons.org/apachekafka/white" alt="Kafka" width="45" height="45"/>
   <!-- Snowflake -->
   <img src="https://cdn.simpleicons.org/snowflake" alt="Snowflake" width="45" height="45"/>
-</p>
+</p> 
 
 ---
 
