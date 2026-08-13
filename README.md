@@ -18,6 +18,10 @@
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg" alt="Spark" width="40" height="40"/><br/>
       <sub><b>Spark</b></sub>
     </td>
+    <td align="center" width="95">
+      <img src="https://cdn.simpleicons.org/databricks/FF3621" alt="Databricks" width="40" height="40"/><br/>
+      <sub><b>Delta Lake</b></sub>
+    </td>
     <td align="center" width="90">
       <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS S3" width="40" height="40"/><br/>
       <sub><b>AWS S3</b></sub>
@@ -38,10 +42,6 @@
       <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS IAM" width="40" height="40"/><br/>
       <sub><b>AWS IAM</b></sub>
     </td>
-    </td>
-    <td align="center" width="95">
-      <img src="https://cdn.simpleicons.org/deltalake/0052CC" alt="Delta Lake" width="40" height="40"/><br/>
-      <sub><b>Delta Lake</b></sub>
     </td>
     <td align="center" width="90">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GH Actions" width="40" height="40"/><br/>
