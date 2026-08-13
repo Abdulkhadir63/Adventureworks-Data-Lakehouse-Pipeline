@@ -23,7 +23,7 @@
       <sub><b>Delta Lake</b></sub>
     </td>
     <td align="center" width="90">
-      <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS S3" width="40" height="40"/><br/>
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" width="45" height="45"/><br/>
       <sub><b>AWS S3</b></sub>
     </td>
     <td align="center" width="90">
