@@ -5,8 +5,6 @@
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="45" height="45"/>
   <!-- SQL -->
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" alt="SQL" width="45" height="45"/>
-  <!-- Apache Spark -->
-  <img src="https://cdn.simpleicons.org/apachespark/E25A1C" alt="Apache Spark" width="45" height="45"/>
   <!-- PySpark -->
   <img src="https://cdn.simpleicons.org/apachespark/E25A1C" alt="PySpark" width="45" height="45"/>
   <!-- Databricks -->
