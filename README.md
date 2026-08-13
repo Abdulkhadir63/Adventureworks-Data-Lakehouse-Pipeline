@@ -38,6 +38,10 @@
       <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS IAM" width="40" height="40"/><br/>
       <sub><b>AWS IAM</b></sub>
     </td>
+    <td align="center" width="95">
+      <img src="https://cdn.simpleicons.org/databricks/FF3621" alt="Databricks" width="40" height="40"/><br/>
+      <sub><b>Databricks</b></sub>
+    </td>
     <td align="center" width="90">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GH Actions" width="40" height="40"/><br/>
       <sub><b>GH Actions</b></sub>
