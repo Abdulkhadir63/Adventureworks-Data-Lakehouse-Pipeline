@@ -12,7 +12,7 @@
   <!-- Airflow -->
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Airflow" width="45" height="45"/>
   <!-- AWS -->
-  <img src="https://cdn.simpleicons.org/amazonaws/FF9900" alt="AWS" width="45" height="45"/>
+  <img src="https://cdn.simpleicons.org/amazons3/569A31" alt="AWS S3" width="45" height="45"/>
 </p> 
 
 ---
