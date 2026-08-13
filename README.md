@@ -1,46 +1,39 @@
 #  AdventureWorks Data Engineering Pipeline 
 
 <p align="center">
+
   <!-- Python -->
-  <a href="https://www.python.org/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" height="40"/>
-  </a>
-  &nbsp;
+
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="45" height="45"/>
+
   <!-- Apache Airflow -->
-  <a href="https://airflow.apache.org/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=apacheairflow&logoColor=white" alt="Apache Airflow" height="40"/>
-  </a>
-  &nbsp;
+
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Apache Airflow" width="45" height="45"/>
+
   <!-- Databricks -->
-  <a href="https://www.databricks.com/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Databricks-FF3621?style=for-the-badge&logo=databricks&logoColor=white" alt="Databricks" height="40"/>
-  </a>
-  &nbsp;
+
+  <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks" width="45" height="45"/>
+
   <!-- Apache Spark -->
-  <a href="https://spark.apache.org/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Apache%20Spark-E25A1C?style=for-the-badge&logo=apachespark&logoColor=white" alt="Apache Spark" height="40"/>
-  </a>
-  <br><br> <!-- Break line for better spacing -->
-  
+
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg" alt="Apache Spark" width="45" height="45"/>
+
   <!-- AWS S3 -->
-  <a href="https://aws.amazon.com/s3/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/AWS%20S3-569A31?style=for-the-badge&logo=amazons3&logoColor=white" alt="AWS S3" height="40"/>
-  </a>
-  &nbsp;
+
+  <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS" width="45" height="45"/>
+
   <!-- Power BI -->
-  <a href="https://powerbi.microsoft.com/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Power%20BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black" alt="Power BI" height="40"/>
-  </a>
-  &nbsp;
+
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" width="45" height="45"/>
+
   <!-- Docker -->
-  <a href="https://www.docker.com/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" height="40"/>
-  </a>
-  &nbsp;
+
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="45" height="45"/>
+
   <!-- GitHub Actions -->
-  <a href="https://github.com/features/actions" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions" height="40"/>
-  </a>
+
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GitHub Actions" width="45" height="45"/>
+
 </p>
 
 ---
