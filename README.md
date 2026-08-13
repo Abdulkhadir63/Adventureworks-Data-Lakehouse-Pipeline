@@ -1,5 +1,5 @@
 #  AdventureWorks Data Engineering Pipeline 
-
+<center>
 <table border="0">
   <tr>
     <td align="center" width="90">
@@ -36,6 +36,7 @@
     </td>
   </tr>
 </table>
+  </center>
 ---
 
 # 📖 About This Project
