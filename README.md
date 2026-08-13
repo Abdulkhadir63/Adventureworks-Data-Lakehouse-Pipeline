@@ -10,7 +10,7 @@
   <!-- Apache Spark -->
   <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg" alt="Apache Spark" width="45" height="45"/>
   <!-- Delta Lake -->
-  <img src="https://www.vectorlogo.zone/logos/delta_io/delta_io-icon.svg" alt="Delta Lake" width="45" height="45"/>
+ <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/deltalake/deltalake-original.svg" alt="Delta Lake" width="45" height="45"/>
   <!-- AWS S3 -->
   <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS" width="45" height="45"/>
   <!-- Power BI -->
