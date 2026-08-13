@@ -1,51 +1,55 @@
 # AdventureWorks Data Engineering Pipeline 
-<center>
+---
 <table border="0">
-  <tr>
-    <td align="center" width="90">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/><br/>
-      <sub><b>Python</b></sub>
-    </td>
-    <td align="center" width="90">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Airflow" width="40" height="40"/><br/>
-      <sub><b>Airflow</b></sub>
-    </td>
-    <td align="center" width="90">
-      <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg" alt="Databricks" width="40" height="40"/><br/>
-      <sub><b>Databricks</b></sub>
-    </td>
-    <td align="center" width="90">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg" alt="Spark" width="40" height="40"/><br/>
-      <sub><b>Spark</b></sub>
-    </td>
-    <td align="center" width="95">
-      <img src="https://cdn.simpleicons.org/databricks/FF3621" alt="Databricks" width="40" height="40"/><br/>
-      <sub><b>Delta Lake</b></sub>
-    </td>
-    <td align="center" width="90">
-      <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS S3" width="40" height="40"/><br/>
-      <sub><b>AWS S3</b></sub>
-    </td>
-    <td align="center" width="90">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" width="40" height="40"/><br/>
-      <sub><b>Power BI</b></sub>
-    </td>
-    <td align="center" width="90">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="40" height="40"/><br/>
-      <sub><b>Docker</b></sub>
-    </td>
-    <td align="center" width="95">
-      <img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" alt="AWS IAM" width="40" height="40"/><br/>
-      <sub><b>AWS IAM</b></sub>
-    </td>
-    </td>
-    <td align="center" width="90">
-      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GH Actions" width="40" height="40"/><br/>
-      <sub><b>GH Actions</b></sub>
-    </td>
-  </tr>
+  <tr>
+    <td align="center" width="95">
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="40" height="40"/><br/>
+      <sub><b>Python</b></sub>
+    </td>
+    <td align="center" width="95">
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Airflow" width="40" height="40"/><br/>
+      <sub><b>Airflow</b></sub>
+    </td>
+    <td align="center" width="95">
+      <img src="https://cdn.simpleicons.org/databricks/FF3621" alt="Databricks" width="40" height="40"/><br/>
+      <sub><b>Databricks</b></sub>
+    </td>
+    <td align="center" width="95">
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apachespark/apachespark-original.svg" alt="Spark" width="40" height="40"/><br/>
+      <sub><b>PySpark</b></sub>
+    </td>
+    <td align="center" width="95">
+      <img src="https://cdn.simpleicons.org/deltalake/0052CC" alt="Delta Lake" width="40" height="40"/><br/>
+      <sub><b>Delta Lake</b></sub>
+    </td>
+    <td align="center" width="95">
+      <img src="https://cdn.simpleicons.org/amazons3/569A31" alt="AWS S3" width="40" height="40"/><br/>
+      <sub><b>AWS S3</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="95">
+      <img src="https://cdn.simpleicons.org/amazoniam/DD344C" alt="AWS IAM" width="40" height="40"/><br/>
+      <sub><b>AWS IAM</b></sub>
+    </td>
+    <td align="center" width="95">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" width="40" height="40"/><br/>
+      <sub><b>Power BI</b></sub>
+    </td>
+    <td align="center" width="95">
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original.svg" alt="Docker" width="40" height="40"/><br/>
+      <sub><b>Docker</b></sub>
+    </td>
+    <td align="center" width="95">
+      <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GH Actions" width="40" height="40"/><br/>
+      <sub><b>GH Actions</b></sub>
+    </td>
+    <td align="center" width="95">
+      <img src="https://cdn.simpleicons.org/diagramsnet/F08705" alt="draw.io" width="40" height="40"/><br/>
+      <sub><b>draw.io</b></sub>
+    </td>
+  </tr>
 </table>
-  </center>
 ---
 
 # 📖 About This Project
