@@ -19,7 +19,7 @@
       <sub><b>PySpark</b></sub>
     </td>
     <td align="center" width="95">
-      <img src="https://www.vectorlogo.zone/logos/deltalakeio/deltalakeio-icon.svg" alt="Delta Lake" width="40" height="40"/><br/>
+      <img src="https://www.vectorlogo.zone/logos/databricks/databricks-icon.svg"" alt="Delta Lake" width="40" height="40"/><br/>
       <sub><b>Delta Lake</b></sub>
     </td>
     <td align="center" width="95">
@@ -43,11 +43,6 @@
     <td align="center" width="95">
       <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/githubactions/githubactions-original.svg" alt="GH Actions" width="40" height="40"/><br/>
       <sub><b>GH Actions</b></sub>
-    </td>
-    <td align="center" width="95">
-      <img src="https://www.vectorlogo.zone/logos/diagramsnet/diagramsnet-icon.svg" alt="draw.io" width="40" height="40"/><br/>
-      <sub><b>draw.io</b></sub>
-    </td>
   </tr>
 </table>
 ---
