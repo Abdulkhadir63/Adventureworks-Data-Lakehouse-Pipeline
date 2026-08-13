@@ -1,17 +1,24 @@
 #  AdventureWorks Data Engineering Pipeline 
 
 <p align="center">
-
-![Python](https://img.shields.io/badge/Python-blue?style=for-the-badge&logo=python)
-![Apache Airflow](https://img.shields.io/badge/Apache%20Airflow-green?style=for-the-badge&logo=apacheairflow)
-![Databricks](https://img.shields.io/badge/Databricks-Lakehouse-orange?style=for-the-badge&logo=databricks)
-![Apache Spark](https://img.shields.io/badge/Apache%20Spark-PySpark-E25A1C?style=for-the-badge&logo=apachespark)
-![Delta Lake](https://img.shields.io/badge/Delta%20Lake-Storage-blue?style=for-the-badge)
-![AWS S3](https://img.shields.io/badge/AWS-S3-FF9900?style=for-the-badge&logo=amazonaws)
-![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-F2C811?style=for-the-badge&logo=powerbi)
-![Docker](https://img.shields.io/badge/Docker-Container-2496ED?style=for-the-badge&logo=docker)
-![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI/CD-2088FF?style=for-the-badge&logo=githubactions)
-
+  <!-- Python -->
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="Python" width="45" height="45"/>
+  <!-- SQL -->
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" alt="SQL" width="45" height="45"/>
+  <!-- Apache Spark -->
+  <img src="https://cdn.simpleicons.org/apachespark/E25A1C" alt="Apache Spark" width="45" height="45"/>
+  <!-- PySpark -->
+  <img src="https://cdn.simpleicons.org/apachespark/E25A1C" alt="PySpark" width="45" height="45"/>
+  <!-- Databricks -->
+  <img src="https://cdn.simpleicons.org/databricks" alt="Databricks" width="45" height="45"/>
+  <!-- Airflow -->
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/apacheairflow/apacheairflow-original.svg" alt="Airflow" width="45" height="45"/>
+  <!-- AWS -->
+  <img src="https://cdn.simpleicons.org/amazonaws/FF9900" alt="AWS" width="45" height="45"/>
+  <!-- Kafka -->
+  <img src="https://cdn.simpleicons.org/apachekafka/white" alt="Kafka" width="45" height="45"/>
+  <!-- Snowflake -->
+  <img src="https://cdn.simpleicons.org/snowflake" alt="Snowflake" width="45" height="45"/>
 </p>
 
 ---
