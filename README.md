@@ -64,6 +64,8 @@ This project covers:
 - Medallion Architecture (Bronze, Silver, Validation, Gold)
 - Apache Airflow orchestration
 - Databricks Workflows
+- Databricks Auto Loader
+- Structured Streaming
 - Delta Lake MERGE operations
 - Stateful high-water mark timestamp-based incremental processing
 - Data quality validation
@@ -117,6 +119,20 @@ At this stage I don't perform any business transformations. The main goal is to 
 
 I also add ingestion metadata such as `ingestion_timestamp` and `source_file_name` to maintain accurate data lineage.
 
+For ingestion, I use **Databricks Auto Loader with Structured Streaming** to incrementally discover and process new CSV files arriving in the S3 incoming folders.
+
+The Bronze ingestion uses:
+
+- Databricks Auto Loader
+- Structured Streaming
+- `availableNow=True`
+- Delta Lake
+- A dedicated checkpoint location for each data source
+
+Auto Loader keeps track of which files have already been processed through its checkpoint state. This allows the Bronze pipeline to process newly arriving files without repeatedly scanning and ingesting the same files.
+
+The incoming data is written as Delta tables and registered through Unity Catalog, while the physical Delta data remains stored in Amazon S3.
+
 ---
 
 ### 🥈 Silver Layer
@@ -124,6 +140,35 @@ I also add ingestion metadata such as `ingestion_timestamp` and `source_file_nam
 The Silver layer is where the data starts becoming useful.
 
 In this layer I clean inconsistent values, standardize data types, remove duplicates, enforce schema integrity, and apply business transformations using PySpark.
+
+The Silver layer reads the Bronze Delta tables using **Structured Streaming** instead of treating Bronze as a normal batch dataset.
+
+The processing pattern is:
+
+```text
+Bronze Delta Table
+        │
+        ▼
+Structured Streaming
+        │
+        ▼
+foreachBatch()
+        │
+        ├── Quality Gate
+        ├── Transformations
+        ├── Deduplication
+        └── Schema Projection
+        │
+        ▼
+Delta MERGE
+        │
+        ▼
+Silver Delta Table
+```
+
+Inside `foreachBatch`, each micro-batch is processed independently and merged into the Silver Delta table using Delta Lake `MERGE` operations.
+
+The Silver streaming pipeline also uses a dedicated checkpoint location so that the streaming engine can keep track of its processing progress.
 
 To optimize processing efficiency, I implemented a stateful incremental ingestion model using high-water mark timestamps (`silver_processed_timestamp`). Instead of reprocessing the whole dataset, Delta Lake MERGE operations run against newly ingested records based on timestamp thresholds.
 
@@ -164,6 +209,48 @@ The complete workflow follows the architecture below.
 
 <img src="docs/Architecture Diagram.png" width="100%" height="750" alt="Pipeline Architecture Diagram">
 
+The main processing flow is:
+
+```text
+AdventureWorks
+      │
+      ▼
+Python Extraction
+      │
+      ▼
+AWS S3 Incoming
+      │
+      ▼
+Apache Airflow
+      │
+      ▼
+Databricks Auto Loader
+      │
+      ▼
+Bronze Delta
+      │
+      ▼
+Structured Streaming
+      │
+      ▼
+foreachBatch + MERGE
+      │
+      ▼
+Silver Delta
+      │
+      ▼
+Validation
+      │
+      ▼
+Gold Delta
+      │
+      ▼
+Databricks SQL Warehouse
+      │
+      ▼
+Power BI
+```
+
 This separation allows each layer to have a single responsibility, making the pipeline easier to maintain and extend in the future.
 
 ---
@@ -175,6 +262,8 @@ One thing I wanted to avoid was reprocessing the entire dataset every time the p
 To solve this, I implemented stateful high-water mark timestamp tracking (`silver_processed_timestamp`).
 
 During each run, the pipeline queries the target Delta Lake table for the max timestamp threshold, reads only newly landed records, and merges them atomically into the Delta Lake tables using MERGE (`UPSERT`) statements.
+
+In addition to the timestamp-based processing logic, the Bronze ingestion uses Databricks Auto Loader checkpoints to maintain file-processing state, while the Silver layer uses Structured Streaming checkpoints to maintain streaming progress between runs.
 
 This approach eliminates unnecessary re-computation while ensuring absolute data consistency.
 
@@ -189,6 +278,8 @@ This project helped me gain hands-on experience with several tools commonly used
 | Python | Pipeline development & scripting |
 | PySpark | Distributed data processing engine |
 | Apache Airflow | Workflow orchestration & scheduling |
+| Databricks Auto Loader | Incremental file discovery and ingestion from S3 |
+| Structured Streaming | Incremental stream processing |
 | Databricks Workflows | Cloud cluster job execution |
 | Delta Lake | ACID storage & high-water mark MERGE |
 | AWS S3 | Raw data storage / landing zone |
@@ -210,6 +301,9 @@ Some of my biggest takeaways were:
 
 - Breaking a large pipeline into small, maintainable layers.
 - Understanding why orchestration is just as important as transformation.
+- Understanding how Databricks Auto Loader incrementally discovers files from cloud storage.
+- Understanding how Structured Streaming processes data incrementally using checkpoints.
+- Understanding how `foreachBatch` can be used to perform batch-style transformations and Delta MERGE operations inside a streaming pipeline.
 - Designing stateful timestamp-driven incremental pipelines instead of full refresh pipelines.
 - Building a dimensional model for analytics.
 - Thinking about data quality before reporting.
@@ -348,6 +442,18 @@ I used Databricks because it provides an environment for running distributed PyS
 
 It also allowed me to learn workflows, notebooks, SQL Warehouse, and Unity Catalog in a single platform.
 
+### Why Databricks Auto Loader?
+
+I used Databricks Auto Loader in the Bronze layer to incrementally discover new files arriving in Amazon S3.
+
+Instead of repeatedly processing every file in the incoming location, Auto Loader maintains file-processing state through checkpoints and allows the pipeline to process newly arriving files efficiently.
+
+### Why Structured Streaming?
+
+I used Structured Streaming for the Bronze and Silver processing patterns because the pipeline needs to process newly arriving data incrementally rather than repeatedly performing full dataset processing.
+
+In the Silver layer, Structured Streaming reads the Bronze Delta table and sends micro-batches into `foreachBatch`, where I perform transformations, deduplication, and Delta MERGE operations.
+
 ### Why Delta Lake?
 
 Delta Lake provides ACID transactions and supports MERGE operations, making incremental updates much easier than rewriting entire datasets.
@@ -387,6 +493,8 @@ Some of the challenges included:
 - Setting up Apache Airflow locally with Docker and managing environment connections securely via JSON environment variables.
 - Connecting Airflow to Databricks Workflows using REST APIs and configuring correct token authentication.
 - Learning Delta Lake MERGE operations and stateful high-water mark timestamp logic.
+- Understanding Auto Loader checkpoints and incremental file ingestion.
+- Understanding Structured Streaming checkpoints and `foreachBatch` processing.
 - Designing a Star Schema from transactional data.
 - Implementing efficient incremental processing.
 - Handling data quality validation.
@@ -462,7 +570,7 @@ You'll also need:
 Bash
 
 ```bash
-git clone https://github.com/your-username/Adventureworks-Data-Engineering-Pipeline.git
+git clone [https://github.com/your-username/Adventureworks-Data-Engineering-Pipeline.git](https://github.com/your-username/Adventureworks-Data-Engineering-Pipeline.git)
 
 cd Adventureworks-Data-Engineering-Pipeline
 ```
@@ -487,7 +595,7 @@ Code snippet
 
 ```text
 AWS_ACCESS_KEY_ID=YOUR_AWS_ACCESS_KEY
-AWS_SECRET_ACCESS_KEY=YOUR_AWS_SECRET_KEY
+AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY
 AWS_DEFAULT_REGION=ap-south-1
 
 AIRFLOW_CONN_DATABRICKS_DEFAULT='{"conn_type": "databricks", "host": "https://<your-workspace>.cloud.databricks.com", "extra": {"token": "YOUR_DATABRICKS_PAT"}}'
@@ -610,12 +718,6 @@ I'm always happy to connect with people who are passionate about Data Engineerin
 # ⭐ Support
 
 If you found this project helpful or interesting, consider giving it a ⭐ on GitHub.
-
-It motivates me to continue building projects, learning new technologies, and sharing my journey with the community.
-
-Thank you for visiting my repository! 🚀
-
-Thank you for visiting my repository! 🚀
 
 It motivates me to continue building projects, learning new technologies, and sharing my journey with the community.
 
